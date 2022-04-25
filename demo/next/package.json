@@ -1,0 +1,26 @@
+{
+  "name": "next",
+  "version": "1.0.0",
+  "description": "sam 与 nextjs 的融合demo",
+  "private": true,
+  "dependencies": {
+    "next": "^12.1.5",
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
+  },
+  "devDependencies": {
+    "@ufly/sam": "^1.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "8.14.0",
+    "eslint-config-next": "12.1.5"
+  },
+  "scripts": {
+    "dev": "cross-env HTTPS=1 sam next",
+    "dev:ns": "sam next",
+    "debug": "cross-env HTTPS=1 node --inspect-brk node_modules/@ufly/sam/bin/sam next",
+    "build": "next build",
+    "serve": "next dev",
+    "start": "next start",
+    "lint": "next lint"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "default",
+  "version": "1.0.0",
+  "description": "default",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env HTTPS=1 sam dev",
+    "dev:ns": "sam dev",
+    "clear": "sam clear",
+    "debug": "cross-env HTTPS=1 node --inspect-brk node_modules/@ufly/sam/bin/sam dev"
+  },
+  "devDependencies": {
+    "@ufly/sam": "^1.0.0",
+    "cross-env": "^7.0.3",
+    "koa": "^2.13.4",
+    "koa-static": "^5.0.0"
+  }
+}

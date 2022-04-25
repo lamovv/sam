@@ -1,0 +1,41 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "Sam 与 Webpack 的融合demo",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@ufly/sam": "^1.0.0",
+    "@types/react": "^18.0.6",
+    "@types/react-dom": "^18.0.2",
+    "@webpack-cli/generators": "^2.4.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sass": "^1.50.1",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1",
+    "workbox-webpack-plugin": "^6.5.3"
+  },
+  "scripts": {
+    "dev": "cross-env HTTPS=1 sam webpack serve --stats-error-details",
+    "dev:ns": "sam webpack serve",
+    "w:init": "webpack init",
+    "s:init": "sam init",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "cross-env HTTPS=1 webpack serve"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
