@@ -5,9 +5,7 @@ module.exports = {
     changelog: true
   },
   scripts: {
-    postbump: 'git add . -A',
-    precommit: 'node build.js',
-    postcommit: 'node git.js',
+    postbump: 'node build.js',
   }
 }
 

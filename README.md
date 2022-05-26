@@ -47,7 +47,7 @@
     path: 'app/index.html', // 应用入口
   }
   ```
-3. `umi|dumi / vite / webpack / vue(vue-cli-service)` 等融合环境下配置。理论上是，可与任何本地服务融合（配置好本地的dev server），提供本地开发调试环境的。
+3. `umi|dumi / vite / webpack / vue(vue-cli-service) / Rax ` 等融合环境下配置。理论上是，可与任何本地服务融合（配置好本地的dev server），提供本地开发调试环境的。
   - `umi|dumi`
     1. 配置 `.umirc.js` 或 `config/config.dev.js`：
 
@@ -198,6 +198,67 @@
           "dev": "cross-env HTTPS=1 sam vue serve",
           // 或者，二者都可
           "dev": "cross-env HTTPS=1 sam vue-cli-service serve",
+        }
+      }
+      ```
+
+  - rax(通过插件定制工程)
+    1. 在项目根目录下新建 `build.plugin.js` 文件
+
+      ```js
+      const {
+        getCertPath,
+      } = require('@ufly/sam');
+      const {
+        env,
+      } = require('process');
+
+      const https = env.HTTPS == 1;
+      const cert = getCertPath();
+
+      module.exports = ({ context, onGetWebpackConfig }) => {
+        onGetWebpackConfig((config) => {
+          config.merge({
+            // 融合Sam 配置
+            devServer: {
+              open: false,
+              server: {
+                type: `http${https ? 's' : ''}`,
+                options: {
+                  ...cert,
+                },
+              },
+              webSocketServer: 'ws',
+              client: {
+                webSocketURL: {
+                  protocol: `ws${https ? 's' : ''}`,
+                  hostname: 'localhost',
+                },
+              },
+            },
+          });
+        });
+      };
+      ```
+    2. 在 `build.json` 里引入自定义插件：
+
+      ```json
+      {
+        "webpack5": true,
+        "targets": [
+          "web"
+        ],
+        "plugins": [
+          "./build.plugin.js",  // 配置自定义插件
+        ]
+      }
+      ```
+    3. 配置`dev`服务启动脚本：`package.json`
+
+      ```json
+      {
+        "scripts": {
+          "dev": "cross-env HTTPS=1 sam rax-app start"
         }
       }
       ```
