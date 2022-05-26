@@ -25,7 +25,7 @@
 1. 安装依赖：
   - 应用内依赖：`ayarn add @ufly/sam`
   - 或全局安装：`ayarn global add @ufly/sam`
-2. 初始化 `sam` 配置文件 `.samrc.js`：`$ sam init`
+2. 初始化 `sam` 配置文件 `.samrc.js`：`$ npx --no-install sam init`
 
   ```javascript
   // .samrc.js
@@ -47,7 +47,7 @@
     path: 'app/index.html', // 应用入口
   }
   ```
-3. `umi|dumi / vite / webpack / vue(vue-cli-service) / Rax ` 等融合环境下配置。理论上是，可与任何本地服务融合（配置好本地的dev server），提供本地开发调试环境的。
+3. `umi|dumi / vite / webpack / vue(vue-cli-service) / Rax ` 等融合环境下配置。理论上，通过`.samrc.js`的`cliPath`配置，可与任何Cli本地服务融合。
   - `umi|dumi`
     1. 配置 `.umirc.js` 或 `config/config.dev.js`：
 
