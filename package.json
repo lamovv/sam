@@ -1,6 +1,6 @@
 {
   "name": "@ufly/sam",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "本地dev环境模拟器",
   "keywords": [
     "umi/dumi",
@@ -53,7 +53,7 @@
     "koa-static": ">=5"
   },
   "engines": {
-    "node": ">=12.22.0"
+    "node": ">=12"
   },
   "scripts": {
     "postinstall": "husky install || true",
