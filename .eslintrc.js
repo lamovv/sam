@@ -42,7 +42,7 @@ module.exports = {
     'valid-jsdoc': 0, // 强制使用有效的 JSDoc 注释
     'no-case-declarations': 1,
     'no-debugger': 1, // 是否禁用 debugger
-    'no-console': 0, // 是否禁用 console
+    'no-console': 1, // 是否禁用 console
     'no-control-regex': 2, // 禁止在正则表达式中使用控制字符
     'no-invalid-regexp': 2, // 禁止 RegExp 构造函数中无效的正则表达式字符串
     'no-regex-spaces': 2, // 禁止正则表达式字面量中出现多个空格

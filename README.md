@@ -36,8 +36,8 @@
   const https = env.HTTPS == 1;
 
   module.exports = {
-    silent: false,  // 查看运行明细
-    logLevel: 'DEBUG', // 配置 TRACE 可查看更详细log
+    silent: false,   // 排查 dev 启动异常时打开，可查看详细log
+    logLevel: 'DEBUG',  // 排查 dev 启动异常时配置为 TRACE，可查看更详细log
     https,  // 是否启用https
     hosts: [  // 各环境域名
       'pre.my.domain.com',
