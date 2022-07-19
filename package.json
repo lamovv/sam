@@ -16,7 +16,10 @@
   "files": [
     "lib"
   ],
-  "repository": "https://github.com/lamovv/sam.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lamovv/sam.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@js-util-fn/url": "^1.0.6",
@@ -43,6 +46,8 @@
     "commitizen": "^4.2.4",
     "esbuild": "^0.14.47",
     "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "glob": "^8.0.3",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.2",
@@ -56,20 +61,18 @@
   "engines": {
     "node": ">=12"
   },
-  "scripts": {
-    "postinstall": "husky install || true",
-    "build": "node build.js",
-    "release": "standard-version -r patch && ([ -n \"git status -s\" ]) && git add . -A && cz || true",
-    "postrelease": "git push --follow-tags origin master && cd dist && npm publish",
-    "beta": "standard-version --prerelease beta",
-    "postbeta": "git push --follow-tags origin master && cd dist && npm publish --tag beta",
-    "alpha": "standard-version --skip.tag --prerelease alpha",
-    "postalpha": "cd dist && npm publish --tag alpha",
-    "postpublish": "rm -rf dist",
-    "clear": "sam clear"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "postinstall": "husky install || true",
+    "release": "(if [ -n \"$(git status -s)\" ];then\ngit add . -A\ncz\nfi) && standard-version -r patch",
+    "beta": "standard-version --skip.tag --skip.commit -p beta",
+    "postbeta": "cd dist && npm publish --tag beta",
+    "alpha": "standard-version --skip.tag --skip.commit -p alpha",
+    "postalpha": "cd dist && npm publish --tag alpha",
+    "postpublish": "rm -rf dist",
+    "clear": "sam clear"
   }
 }

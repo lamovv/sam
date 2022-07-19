@@ -4,7 +4,9 @@
 **/node_modules
 
 # production
+/build
 /dist
+/.vscode
 
 # misc
 .DS_Store
@@ -13,6 +15,7 @@ yarn-error.log
 
 /coverage
 .idea
+package-lock.json
 *bak
 .vscode
 

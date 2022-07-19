@@ -8,24 +8,21 @@
 > [@ufly/sam](https://www.npmjs.com/package/@ufly/sam)
 
 ---
-在提供模拟 多套部署环境（日常/预发/生产）服务，解决 登录态、https 等本地开发调试环境问题。
-定义为 `simulator`，取 `same` 之义，简名为 `sam`。
+提供 模拟多套域名环境（日常/预发/生产）能力，解决、CORS、登录态、https 等本地开发调试环境问题。定义为 `simulator`，取 `same` 之义，简名为 `sam`。
 
 ### Support
 无侵入的适配多开发框架
 
-- umi/dumi
-- vite
-- webpack
-- vue-cli-service
+- max(umi4) / umi / dumi / nextjs
+- taro / rax
+- vite / webpack / vue-cli-service
 - default
   - 基于`koa`、`koa-static`的`peerDependencies` 启动 Web Server 服务，便于预览项目编译构建后的效果
 
 ### Usage
-1. 安装依赖：
-  - 应用内依赖：`ayarn add @ufly/sam`
-  - 或全局安装：`ayarn global add @ufly/sam`
-2. 初始化 `sam` 配置文件 `.samrc.js`：`$ npx --no-install sam init`
+1. 安装依赖：`yarn add @ufly/sam -D`
+
+2. 初始化 `sam` 配置文件 `.samrc.js`：在应用内根目录执行 `$ npx sam init`
 
   ```javascript
   // .samrc.js
@@ -36,8 +33,8 @@
   const https = env.HTTPS == 1;
 
   module.exports = {
-    silent: false,   // 排查 dev 启动异常时打开，可查看详细log
-    logLevel: 'DEBUG',  // 排查 dev 启动异常时配置为 TRACE，可查看更详细log
+    silent: false, // 排查 dev 启动异常时打开，可查看详细log
+    logLevel: 'DEBUG', // 排查 dev 启动异常时配置为 TRACE，可查看更详细log
     https,  // 是否启用https
     hosts: [  // 各环境域名
       'pre.my.domain.com',
@@ -128,13 +125,7 @@
         devServer: {
           // 融合Sam 配置
           allowedHosts: 'all',
-          server: {
-            type: `http${https ? 's':''}`,
-            options: {
-              ...cert
-            }
-          },
-          webSocketServer: 'ws',
+          https: https && cert,
           client: {
             webSocketURL: {
               protocol: `ws${https?'s':''}`,
@@ -174,13 +165,8 @@
         // 融合Sam 配置
         devServer: {
           allowedHosts: 'all',
-          server: {
-            type: `http${https ? 's':''}`,
-            options: {
-              ...cert
-            }
-          },
-          webSocketServer: 'ws',
+          allowedHosts: 'all',
+          https: https && cert,
           client: {
             webSocketURL: {
               protocol: `ws${https?'s':''}`,
@@ -262,6 +248,30 @@
         }
       }
       ```
+
+  - Taro 配置 `config/dev.js`
+
+    ```js
+    const { getCertPath } = require('@ufly/sam');
+    const { env } = require('process');
+
+    const https = env.HTTPS == 1;
+    const cert = getCertPath();
+
+    module.exports = {
+      env: {
+        NODE_ENV: '"development"',
+      },
+      h5: {
+        //..., 其他配置
+        devServer: {
+          open: false,
+          https: https && cert,
+          sockHost: 'localhost',
+        },
+      },
+    };
+    ```
 
 ### preview
 预览项目编译后的效果

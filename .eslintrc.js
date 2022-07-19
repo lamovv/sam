@@ -1,8 +1,8 @@
 module.exports = {
   // 根目录标识
   root: true, // 标识当前配置文件为eslint的根配置文件，让其停止在父级目录中继续寻找
-  extends: ['eslint:recommended'],
   parser: '@babel/eslint-parser', //解析器
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   parserOptions: {
     sourceType: 'module', //指定JS代码来源的类型，script(script标签引入？) | module（es6的module模块）
     ecmaVersion: 6, //支持的ES语法版本，默认为5
@@ -68,7 +68,6 @@ module.exports = {
     'key-spacing': [2, { beforeColon: false, afterColon: true }], // 强制在对象字面量的属性中键和值之间使用一致的间距
     'max-nested-callbacks': [1, 5], // 强制回调函数最大嵌套深度 5层
     'no-spaced-func': 2, // 禁止 function 标识符和括号之间出现空格
-    indent: [2, 2], // 规范缩进
     quotes: [2, 'single', { avoidEscape: true }], // 强制使用一致的反勾号、双引号或单引号
     'max-params': [2, 6], // 强制 function 定义中最多允许的参数数量，因为当前寄存器最多只有6个用作函数参数
     'no-empty': [2, { allowEmptyCatch: true }], // 禁止空块语句,catch可空
