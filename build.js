@@ -11,9 +11,7 @@ shell.exec(`rm -rf ${dist}`);
 // esbuild
 // const entryPoints = glob.sync('./lib/**/*.js');
 esbuild.buildSync({
-  entryPoints: [
-    './lib/index.js'
-  ],
+  entryPoints: ['./lib/index.js'],
   bundle: true,
   format: 'cjs',
   outdir: 'dist/lib',
@@ -23,12 +21,10 @@ esbuild.buildSync({
   minifyIdentifiers: true,
   minifySyntax: true,
   treeShaking: true,
-  external: Object.keys(pkg.dependencies).concat(Object.keys(pkg.peerDependencies || {}))
+  external: Object.keys(pkg.dependencies).concat(Object.keys(pkg.peerDependencies || {})),
 });
 esbuild.buildSync({
-  entryPoints: [
-    './lib/options.js'
-  ],
+  entryPoints: ['./lib/options.js'],
   format: 'cjs',
   outdir: 'dist/lib',
   platform: 'node',
@@ -43,6 +39,7 @@ const {
   name,
   version,
   description,
+  repository,
   bin,
   main,
   files,
@@ -50,20 +47,28 @@ const {
   dependencies,
   engines,
   publishConfig,
-  peerDependencies
+  peerDependencies,
 } = pkg;
-fs.writeFileSync('dist/package.json', JSON.stringify({
-  name,
-  version,
-  description,
-  bin,
-  main,
-  files,
-  license,
-  dependencies,
-  engines,
-  publishConfig,
-  peerDependencies
-}, null, 2));
+fs.writeFileSync(
+  'dist/package.json',
+  JSON.stringify(
+    {
+      name,
+      version,
+      description,
+      repository,
+      bin,
+      main,
+      files,
+      license,
+      dependencies,
+      engines,
+      publishConfig,
+      peerDependencies,
+    },
+    null,
+    2,
+  ),
+);
 shell.exec('cp -rf ./README.md bin dist/');
 shell.exec('cp -rf ./lib/tpl dist/lib');
