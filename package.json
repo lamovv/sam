@@ -1,6 +1,6 @@
 {
   "name": "@ufly/sam",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "本地dev环境模拟器",
   "keywords": [
     "umi/dumi",
